@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}My Data Science Site-My Repositories{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<p>
+    <!--<a class="btn btn-primary" href="{{url_for('BPSZZ.clonerepo')}}">Clone Repo</a>-->
+</p>
+
+<p>    <h2>Repo SZZs for {{repo.repoName}}</h2></p>
+
+{% if szzs  and szzs.count()>0  %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">SZZ Index</th>
+            <th scope="col">SZZ Type</th>
+            <th scope="col">SZZ Output</th>
+            <th scope="col">Analysis</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for s in szzs %}
+        <tr>
+            <th scope="row">{{s.id}}</th>
+            <td><a href="#">AG</a></td>
+            <td>SZZ Out</td>
+            <td><a class="btn btn-primary" href="{{url_for('BPSZZ.szzparse', id=s.id)}}">Parse SZZ data</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% else %}
+<p>  <h6> No SZZs Performed.</h6> <a class="btn btn-primary m-1" href="{{url_for('BPSZZ.runszz', id = repo.id)}}">Perform SZZ</a> </p>
+
+    {% endif %}
+
+
+<hr />
+
+{% endblock %}

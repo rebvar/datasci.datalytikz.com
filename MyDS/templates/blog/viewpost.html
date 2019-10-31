@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% block title %}My Data Science Site-Blog Post View{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+    .replymargin {
+        margin-top: 3px;
+        margin-left: 20px;
+    }
+
+    .comment {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .commentbox {
+        border: 1px solid black;
+        background-color:#fffefe;
+        padding: 2px;
+        border-radius: 5px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-offset-2 col-md-8 p-4">
+        <h2>{{ post.postTitle }}</h2>
+    </div>
+</div>
+
+<hr>
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8 p-4">
+        <p>{{ post.postBody|safe }}</p>
+        <hr>
+    </div>
+</div>
+
+
+<div class="row">
+
+</div>
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-4 p-4">
+        <h5>Comments</h5>
+    </div>
+</div>
+
+<form method="post" action="">
+    <input name="_csrf_token" id="_csrf_token" type="hidden" value="{{ csrf_token() }}" />
+    <div class="row form-group">
+
+        <div class="col-md-10 p-3">
+            {% if 'u' in session %}
+            <div class="form-row">
+                <textarea id="commentText" rows="4" name="commentText" required class="form-control">{{request.form.commentText}}</textarea>
+            </div>
+            {% else %}
+            <div class="form-row p-2">
+                <div class="col-md-3">
+                    <input type="text" required id="commentorName" name="commentorName" class="form-control" value="{{request.form.commentorName or ''}}" placeholder="Your Name" />
+                </div>
+                <div class="col-md-3">
+                    <input type="email" required id="commentorEmail" name="commentorEmail" class="form-control" value="{{request.form.commentorEmail or ''}}" placeholder="Your Email" />
+                </div>
+            </div>
+
+            <div class="form-row p-2">
+                <textarea id="commentText" rows="4" name="commentText" required class="form-control">{{request.form.commentText}}</textarea>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-2 p-3">
+            <input name="formAddComment" class="btn btn-success form-control" type="submit" value="Submit">
+        </div>
+    </div>
+</form>
+
+
+{% if ht %}
+
+{{ht|safe}}
+
+{% endif %}
+
+{% macro render_childs(id) -%}
+    {% if commentReplies[id]|length>0 %}
+    {% for comment in commentReplies[id] %}
+<div class="row replymargin">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="row commentbox" id="div-comment-{{comment.id}}">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    {{comment.commentText|safe}}
+                </div>
+                <div class="row">
+
+                    &nbsp;&nbsp; Posted By {% if comment.commentorId>0%} {{comment.commentorName}} {% else %} Anonymous {% endif %} &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="return addReplyDiv({{comment.id}},{{comment.postId}});" href="#">Reply</a>
+                </div>
+            </div>
+        </div>
+
+        {{render_childs(comment.id)}}
+    </div>
+</div>
+{% endfor %}
+{% endif %}
+{%- endmacro %}
+
+
+{% if commentsDict %}
+<div class="container">
+    {% for comment in comments %}
+    {% if comment.inReplyTo == 0 %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+            <div class="row commentbox" id="div-comment-{{comment.id}}">
+                <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        {{comment.commentText|safe}}
+                    </div>
+                    <div class="row">
+                        &nbsp;&nbsp; Posted By {% if comment.commentorId>0%} {{comment.commentorName}} {% else %} Anonym {% endif %} &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="return addReplyDiv({{comment.id}},{{comment.postId}});" href="#">Reply</a>
+                    </div>
+                </div>
+            </div>
+
+            {{ render_childs(comment.id) }}
+        </div>
+    </div>
+    <div class="row">
+        <hr style="width:100%;height:2px;" />
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% endif %}
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script type="text/javascript">
+
+    function addReplyDiv(id, postId) {
+        clickedDiv = $("#div-comment-" + id.toString());
+        $('<div class="row commentbox replymargin" id="replydiv' + id.toString() + '"   name="replydiv' + id.toString() + '" > <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12"> <div class="row"> <textarea rows="4" class="form-control" id="txtreplyfor_' + id.toString() + '"    name="txtreplyfor_' + id.toString() + '" /> </div> <div class="row"> <a onclick="submitForm(' + id.toString() + ',' + postId.toString() + '); return false;" href="#" class="btn btn-primary" id="submitReply" >Click To Submit</a> </div>  </div>  </div>').insertAfter(clickedDiv);
+        return false;
+    }
+
+
+    function submitForm(id, postId) {
+
+
+        try {
+            txt = $('#txtreplyfor_' + id.toString()).val();
+            $.ajax(
+            {
+                type: 'POST',
+                url: "/submit_comment_reply",
+                contentType: "application/json;charset=UTF-8",
+                dataType: 'json',
+                data: JSON.stringify({ "replyText": txt, "id": id.toString(), "postId": postId.toString() }),
+                success: function (data) {
+
+                    clickedDiv = $("#div-comment-" + data.id);
+                    $(data.html).insertAfter(clickedDiv);
+                    $('#replydiv' + data.id).remove();
+                }
+            });
+        }
+        catch (err) {
+            alert(err);
+        }
+
+        return false;
+    }
+
+</script>
+
+{% endblock %}

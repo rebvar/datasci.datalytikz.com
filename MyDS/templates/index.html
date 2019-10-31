@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}My Data Science Site-Home Page{% endblock %}
+{% block head %}
+  {{ super() }}
+  <style type="text/css">
+    .important { color: #336699; }
+  </style>
+{% endblock %}
+{% block content %}
+  <h1>Index</h1>
+
+{% if u!=None %}
+
+<p class="important">
+    Welcome {{u.name}} !
+</p>
+
+<p>             
+Check out your <a href="{{url_for('BPUsers.dashboard')}}">Dashboard</a> or start a new Experiment.
+</p>
+
+{% else %}
+<p class="important">
+    Welcome to DataLytikz. 
+	
+	
+</p>
+
+<p>             
+To start, please <a href="{{url_for('BPUsers.login')}}">Login</a> or <a href="{{url_for('BPUsers.signup')}}"> Register </a>.
+</p>
+{% endif %}
+
+
+<p> My personal homepage <a href="http://rebvar.datalytikz.com/"> http://rebvar.datalytikz.com/ </a></p>
+
+{% endblock %}
+

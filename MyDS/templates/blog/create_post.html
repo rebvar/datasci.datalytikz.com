@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}My Data Science Site-Blog Post{% endblock %}
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+{% block content %}
+
+    {% if message %}
+        
+        <div class="row">
+            {{message}} 
+        </div>
+        
+    {% endif %}
+
+    <div class="row warpper" style="min-width: 1024px; margin: auto">
+        <h1>Flask-CKEditor</h1>
+        <form method="post" enctype="multipart/form-data">
+            <input name="_csrf_token" id="_csrf_token" type="hidden" value="{{ csrf_token() }}" />
+            <label for="title">Title</label><br />
+            <input type="text" name="title"><br />
+            <label for="body">Body</label>
+            {{ ckeditor.create() }}<br>
+            <input class="btn btn-success" type="submit" value="Save">
+        </form>
+    </div>
+    
+
+{% endblock %}
+
+{% block scripts %}
+
+{{ ckeditor.load() }}
+{{ ckeditor.config() }}
+
+{% endblock %}

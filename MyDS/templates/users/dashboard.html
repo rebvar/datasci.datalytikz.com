@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+{% block title %}My Data Science Site-My Dashboard{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+    .important {
+        color: #336699;
+    }
+</style>
+{% endblock %}
+{% block content %}
+
+<p class="important">
+    {{u.name}}'s Dashborad
+</p>
+
+<p>    <h2>Completed Experiments</h2></p>
+
+    {% if completedExps and completedExps.count()>0  %}
+
+
+<div class="accordion" id="accordionCompletedExperiments">
+
+    {% for exp in completedExps %}
+    <div class="card">
+        <div class="card-header" id="heading{{loop.index}}">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{loop.index}}" aria-expanded="true" aria-controls="collapse{{loop.index}}">
+                    Experiment {{loop.index}} - {{ exp.type }}
+                </button>
+            </h5>
+        </div>
+
+        <div id="collapse{{loop.index}}" class="collapse" aria-labelledby="heading{{loop.index}}" data-parent="#accordionCompletedExperiments">
+            <div class="card-body">
+
+                <select id="selectCExp-{{exp.id}}" name="selectCExp-{{exp.id}}">
+
+                    {% for ds in cDataSets[loop.index0] %}
+                    <option value="{{ds}}">{{ds}}</option>
+                    {% endfor %}
+                </select>
+
+                <a class="btn btn-info" href="#" onclick="return perDataSetPlot({{exp.id}});"></a>
+                <div id="divCExp-{{exp.id}}">
+
+                </div>
+
+                <div id="divPlots-{{exp.id}}">
+
+                    {% for plot in plotFiles[loop.index0] %}
+                    <img src="{{plot}}" style="width:100%" />
+                    <hr />
+                    {% endfor %}
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+    {% else %}
+<p>    <h6> No Completed Experiments.</h6></p>
+
+    {% endif %}
+
+<hr />
+
+
+<p class="important">    <h2>Running Experiments</h2></p>
+
+    {% if runningExps and runningExps.count()>0 and True in runningValid %}
+<div class="accordion" id="accordionRunningExperiments">
+
+    {% for exp in runningExps %}
+    {% if runningValid[loop.index0] %}
+
+
+    <div class="card">
+        <div class="card-header" id="rheading{{loop.index}}">
+            <h5 class="mb-0">
+                
+                <button class="btn btn-link collapsed {{text_style}}" type="button" data-toggle="collapse" data-target="#rcollapse{{loop.index}}" aria-expanded="true" aria-controls="rcollapse{{loop.index}}">
+
+                    Experiment {{loop.index}} - {{ exp.type }}
+
+                </button>
+            </h5>
+        </div>
+
+        <div id="rcollapse{{loop.index}}" class="collapse" aria-labelledby="rheading{{loop.index}}" data-parent="#accordionRunningExperiments">
+            <div class="card-body">
+                Experiment Parameters are: {{exp.pars}} <br />
+                Start Time is: {{exp.startDateTime}} <br />
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+    {% else %}
+<p>    <h6> No Running Experiments.</h6></p>
+
+    {% endif %}
+
+
+
+<hr />
+
+
+<p class="important">    <h2>Interrupted Experiments</h2></p>
+
+    {% if runningExps and runningExps.count()>0 and False in runningValid %}
+<div class="accordion" id="accordionInterruptedExperiments">
+    
+    {% for exp in runningExps %}
+    {% if not runningValid[loop.index0] %}
+
+
+    <div class="card">
+        <div class="card-header" id="iheading{{loop.index}}">
+            <h5 class="mb-0">
+                <button class="btn btn-link collapsed text-danger" type="button" data-toggle="collapse" data-target="#icollapse{{loop.index}}" aria-expanded="true" aria-controls="icollapse{{loop.index}}">
+
+                    Experiment {{loop.index}} - {{ exp.type }}
+
+                </button>
+            </h5>
+        </div>
+
+        <div id="icollapse{{loop.index}}" class="collapse" aria-labelledby="iheading{{loop.index}}" data-parent="#accordionInterruptedExperiments">
+            <div class="card-body">
+                <a class="btn btn-primary">Re-run</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+    {% else %}
+<p>    <h6> No Interrupted Experiments.</h6></p>
+
+    {% endif %}
+
+
+
+{% endblock %}
+
+
+{%block scripts%}
+
+<script type="text/javascript">
+
+    function perDataSetPlot(id) {
+        try {
+            ds = $('#selectCExp-' + id.toString()).val();
+            $.ajax(
+                {
+                    type: 'GET',
+                    url: "/generate_plots_per_dataset",
+                    contentType: "application/json;charset=UTF-8",
+                    dataType: 'json',
+                    data: JSON.stringify({ "dataset": ds, "id": id.toString() }),
+                    success: function (data) {
+
+                        clickedDiv = $("#divCExp-" + data.id);
+                        $(data.html).insertAfter(clickedDiv);
+                    }
+                });
+        }
+        catch (err) {
+            alert(err);
+        }
+
+        return false;
+    }
+
+
+
+</script>
+
+{%endblock%}

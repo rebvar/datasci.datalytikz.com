@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}My Data Science Site-My Repositories{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<p>
+    <a class="btn btn-primary" href="{{url_for('BPSZZ.clonerepo')}}">Clone Repo</a>
+</p>
+
+<p>    <h2>My Cloned Repositories</h2></p>
+
+{% if completedClones  and completedClones.count()>0  %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Repo Name</th>
+            <th scope="col">Cloned in</th>
+            <th scope="col">URL</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        {% for repo in completedClones %}
+        <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td><a href="{{url_for('BPSZZ.repoinfo',id=repo.id)}}">{{repo.repoName}}</a></td>
+            <td>{{repo.cloneFinishDate}}</td>
+            <td>{{repo.url}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p>    <h6> No Cloned Repositories.</h6></p>
+
+    {% endif %}
+
+
+<hr />
+
+<p>    <h2>My Running Clonings.</h2></p>
+
+{% if runningClones  and runningClones.count()>0  %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Repo Name</th>
+            <th scope="col">Cloned in</th>
+            <th scope="col">URL</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for repo in runningClones %}
+        <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{repo.repoName}}</td>
+            <td>{{repo.cloneFinishDate}}</td>
+            <td>{{repo.url}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p>    <h6> No Running Clonings.</h6></p>
+
+    {% endif %}
+
+
+{% endblock %}

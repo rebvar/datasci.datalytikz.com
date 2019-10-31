@@ -1,0 +1,250 @@
+{% extends "base.html" %}
+{% block title %}My Data Science Site-New LSH-CPDP Experiment{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+    .important {
+        color: #336699;
+    }
+</style>
+
+{% endblock %}
+{% block content %}
+
+
+<div class="row">
+    <form action="" method="post" class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+        <input name="_csrf_token" id="_csrf_token" type="hidden" value="{{ csrf_token() }}" />
+        <div class="nav nav-tabs" id="v-pills-tab" role="tablist">
+            <a class="nav-item nav-link active" id="v-pills-tab-1" data-toggle="tab" href="#v-pills-panel-1" role="tab" aria-controls="v-pills-panel-1" aria-selected="true">Basic Model Settings</a>
+            <a class="nav-item nav-link" id="v-pills-tab-2" data-toggle="tab" href="#v-pills-panel-2" role="tab" aria-controls="v-pills-panel-2" aria-selected="false">LSH Parameters</a>
+            <a class="nav-item nav-link" id="v-pills-tab-3" data-toggle="tab" href="#v-pills-panel-3" role="tab" aria-controls="v-pills-panel-3" aria-selected="false">Dataset Specifications</a>
+            <a class="nav-item nav-link" id="v-pills-tab-4" data-toggle="tab" href="#v-pills-panel-4" role="tab" aria-controls="v-pills-panel-4" aria-selected="false">Review and Execute</a>
+        </div>
+
+        <div class="tab-content" id="v-pills-tabContent">
+            <div class="tab-pane fade show active" id="v-pills-panel-1" role="tabpanel" aria-labelledby="v-pills-tab-1">
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-4 col-xs-12  col-sm-12">
+                        <label for="lrnr">Base Learner</label>
+                        <select class="form-control" id="lrnr" name="lrnr">
+                            {% for item in lrnrs %}
+                            {% if request.form.lrnr==item %}
+                            <option value="{{ item }}" selected>{{item}}</option>
+                            {% else %}
+                            <option value="{{ item }}">{{item}}</option>
+                            {% endif %}
+                            {% endfor%}
+
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4 col-xs-12  col-sm-12">
+                        <label for="vSetType">Validation Selection Method</label>
+                        <select class="form-control" id="vSetType" name="vSetType">
+
+                            {% for item in vSetType %}
+                            {% if request.form.vSetType==item %}
+                            <option value="{{ item }}" selected>{{item}}</option>
+                            {% else %}
+                            <option value="{{ item }}">{{item}}</option>
+                            {% endif %}
+                            {% endfor%}
+
+                        </select>
+                    </div>
+
+
+                    <div class="form-group col-md-4 col-xs-12">
+                        <label for="features">Feature Set</label>
+                        <select class="form-control" id="features" name="features">
+
+                            {% for item in features %}
+                            {% if request.form.features==item %}
+                            <option value="{{ item }}" selected>{{item}}</option>
+                            {% else %}
+                            <option value="{{ item }}">{{item}}</option>
+                            {% endif %}
+                            {% endfor%}
+
+
+                        </select>
+                    </div>
+
+
+                </div>
+                <div class="form-row">
+
+                    <div class="form-group col-md-4 col-xs-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="tunelrnr" name="tunelrnr" disabled {% if request.form.tunelrnr %} checked {% endif %}>
+                            <label class="form-check-label" for="tunelrnr">
+                                Tune base learner?
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-4 col-xs-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="tunecut" id="tunecut" disabled {% if request.form.tunecut %} checked {% endif %}>
+                            <label class="form-check-label" for="tunecut">
+                                Cutoff Point Optimization?
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="tab-pane fade" id="v-pills-panel-2" role="tabpanel" aria-labelledby="v-pills-tab-2">
+               
+                <div class="form-row">
+
+                    <div class="form-group col-md-4 col-xs-12  col-sm-12">
+                        <label for="numOptions">#Options (for LSH Parameters)</label>
+                        <input type="number" class="form-control" id="numOptions" name="numOptions" value="{{ request.form.numOptions or 3 }}" maxlength="2">
+                    </div>
+
+
+
+                    <div class="form-group col-md-4 col-xs-12 col-sm-12">
+                        <label for="iters">#Repeats (randomness)</label>
+                        <input type="number" class="form-control" id="iters" name="iters" value="{{request.form.iters or 5}}" maxlength="2">
+                    </div>
+
+                    <div class="form-group col-md-4 col-xs-12 col-sm-12">
+                        <label for="lshType">LSH Type</label>
+                        <div class="form-group pl-2">
+                            {% if request.form.lshType == 'MinHash' %}
+                            <label class="radio-inline"><input type="radio" id="lshType" name="lshType" value="SuperBit"> SuperBit </label>
+                            <label class="radio-inline"><input type="radio" id="lshType" name="lshType" value="MinHash" checked="checked"> MinHash </label>
+                            {% else %}
+                            <label class="radio-inline"><input type="radio" id="lshType" name="lshType" value="SuperBit" checked="checked"> SuperBit </label>
+                            <label class="radio-inline"><input type="radio" id="lshType" name="lshType" value="MinHash"> MinHash </label>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3 col-xs-12  col-sm-12">
+                        <label for="minStages">Min #Stages</label>
+                        <input type="number" class="form-control" id="minStages" name="minStages" value="{{ request.form.minStages or 3}}" maxlength="2">
+                    </div>
+
+                    <div class="form-group col-md-3 col-xs-12  col-sm-12">
+                        <label for="maxStages">Max #Stages</label>
+                        <input type="number" class="form-control" id="maxStages" name="maxStages" value="{{ request.form.maxStages or 10}}" maxlength="2">
+                    </div>
+
+                    <div class="form-group col-md-3 col-xs-12  col-sm-12">
+                        <label for="minBuckets">Min #Buckets</label>
+                        <input type="number" class="form-control" id="minBuckets" name="minBuckets" value="{{ request.form.minBuckets or 6}}" maxlength="2">
+                    </div>
+
+                    <div class="form-group col-md-3 col-xs-12  col-sm-12">
+                        <label for="maxBuckets">Max #Buckets</label>
+                        <input type="number" class="form-control" id="maxBuckets" name="maxBuckets" value="{{ request.form.maxBuckets or 40}}" maxlength="2">
+                    </div>
+
+                </div> 
+
+            </div>
+            <div class="tab-pane fade" id="v-pills-panel-3" role="tabpanel" aria-labelledby="v-pills-tab-3">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="vSetCount">#Count for multiple random </label>
+                        <input type="number" class="form-control" name="vSetCount" id="vSetCount" value="{{request.form.vSetCount or 5}}" maxlength="2">
+                    </div>
+
+                    <div class="form-group col-md-4 col-xs-12  col-sm-12">
+                        <label for="vSetMaxDSSize">#MaxSize for multiple random</label>
+                        <input type="number" class="form-control" id="vSetMaxDSSize" name="vSetMaxDSSize" value="{{ request.form.vSetMaxDSSize or 20}}" maxlength="2">
+                    </div>
+                </div>
+
+                <div class="form-row" style="max-height:200px;">
+                    <div class="col-md-4">
+                        <select class="form-control" style="max-height:200px;" multiple id="select1">
+                            {% for fol in fols %}
+                            <option value="!{{fol}}" disabled> {{fol}} </option>
+                            {% for ds in DataPacks[fol] %}
+                            <option value="!{{fol}};{{ds}}"> &nbsp;&nbsp; {{ds}} </option>
+                            {% endfor %}
+                            {% endfor %}
+                        </select>
+
+                    </div>
+                    <div class="col-md-2">
+                        <a href="#" id="add"> &gt;&gt;</a> <br /> <a href="#" id="addall">All &gt;&gt;</a>
+                        <br />
+                    </div>
+                    <div class="col-md-2">
+                        <br /><br />
+                        <a href="#" id="remove">&lt;&lt; </a> <br /> <a href="#" id="removeall">&lt;&lt; All</a>
+                    </div>
+
+                    <div class="col-md-4">
+                        <select class="form-control" style="max-height:200px;" multiple id="select2">
+                            {% for fol in fols %}
+                            <option value="!{{fol}}" disabled> {{fol}} </option>
+                            {% endfor %}
+                        </select>
+                        <input type="hidden" name="hdselect2" id="hdselect2" value="{{request.form.hdselect2}}" />
+                    </div>
+
+                </div>
+
+
+                
+            </div>
+            <div class="tab-pane fade" id="v-pills-panel-4" role="tabpanel" aria-labelledby="v-pills-tab-4">
+                <div class="form-row">
+                    <div class="col-md-12 text-center m-4 p-4">
+                        <button type="submit" class="btn btn-primary">Run</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </form>
+
+</div>
+
+        {% if error %}
+<div class="row">
+    <p class="error">
+        <strong>Error:</strong> {{ error }}
+    </p>
+</div>
+        {% endif %}
+
+        {% if result %}
+<div class="row">
+    <p>
+        <strong>The result is:</strong> {{ result }}
+    </p>
+</div>
+
+        {% endif %}
+
+
+        {% endblock %}
+
+
+
+
+
+        {% block scripts %}
+
+            <script type="text/javascript" src="{{url_for('static',filename='own/expr-ds.js')}}">
+
+</script>
+
+        {% endblock %}

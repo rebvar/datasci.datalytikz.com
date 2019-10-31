@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "MyDS", "MyDS\MyDS.pyproj", "{8247DCDA-5886-4A03-AB75-BE02A1DDF4E6}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PyLSH", "PyLSH.pyproj", "{9D1D0901-A42E-4CCB-A27B-512A3D39EA48}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PyGIS", "PyGIS.pyproj", "{2ED2516B-6888-452D-9E63-A5E20F1D70DB}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PyLib", "PyLib.pyproj", "{BA1F3BC0-0CB1-432E-A308-EFF55EE9D5D1}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PyCQ", "PyCQ.pyproj", "{57C6DB8C-E869-4133-84A7-14C3025C2E0E}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PySZZ", "PySZZ.pyproj", "{CE5274F0-CAD9-4AA1-92C7-06E674AAC1A1}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Tests", "Tests\Tests.pyproj", "{6A2208EC-BFFD-457C-836E-01B7EE884D99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8247DCDA-5886-4A03-AB75-BE02A1DDF4E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8247DCDA-5886-4A03-AB75-BE02A1DDF4E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8247DCDA-5886-4A03-AB75-BE02A1DDF4E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8247DCDA-5886-4A03-AB75-BE02A1DDF4E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D1D0901-A42E-4CCB-A27B-512A3D39EA48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D1D0901-A42E-4CCB-A27B-512A3D39EA48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ED2516B-6888-452D-9E63-A5E20F1D70DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED2516B-6888-452D-9E63-A5E20F1D70DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA1F3BC0-0CB1-432E-A308-EFF55EE9D5D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA1F3BC0-0CB1-432E-A308-EFF55EE9D5D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57C6DB8C-E869-4133-84A7-14C3025C2E0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57C6DB8C-E869-4133-84A7-14C3025C2E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE5274F0-CAD9-4AA1-92C7-06E674AAC1A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE5274F0-CAD9-4AA1-92C7-06E674AAC1A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A2208EC-BFFD-457C-836E-01B7EE884D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A2208EC-BFFD-457C-836E-01B7EE884D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {1797CCE2-248D-491A-A6B0-ED961C670281}
+	EndGlobalSection
+EndGlobal

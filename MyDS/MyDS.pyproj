@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>8247dcda-5886-4a03-ab75-be02a1ddf4e6</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <ProjectTypeGuids>{789894c7-04a9-4a11-a6b5-3f4435165112};{1b580a1a-fdb3-4b32-83e1-6407eb2722e6};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>runserver.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <LaunchProvider>Web launcher</LaunchProvider>
+    <OutputPath>.</OutputPath>
+    <StaticUriPattern>^/static/.*</StaticUriPattern>
+    <StaticUriRewrite>^/$(MSBuildProjectName)/static/.*</StaticUriRewrite>
+    <PythonWsgiHandler>$(MSBuildProjectName).app</PythonWsgiHandler>
+    <Name>MyDS</Name>
+    <RootNamespace>MyDS</RootNamespace>
+    <InterpreterId>MSBuild|DataSci|$(MSBuildProjectFullPath)</InterpreterId>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Interpreter Include="..\..\..\DataSci\">
+      <Id>DataSci</Id>
+      <Version>3.6</Version>
+      <Description>DataSci (PyWin367)</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DataPacks\D5-Reg\ant-1.7.arff" />
+    <Content Include="DataPacks\D5-Reg\camel-1.6.arff" />
+    <Content Include="DataPacks\D5-Reg\ivy-2.0.arff" />
+    <Content Include="DataPacks\D5-Reg\jedit-4.3.arff" />
+    <Content Include="DataPacks\D5-Reg\log4j-1.2.arff" />
+    <Content Include="DataPacks\D5-Reg\lucene-2.4.arff" />
+    <Content Include="DataPacks\D5-Reg\poi-3.0.arff" />
+    <Content Include="DataPacks\D5-Reg\prop-6.arff" />
+    <Content Include="DataPacks\D5-Reg\synapse-1.2.arff" />
+    <Content Include="DataPacks\D5-Reg\tomcat.arff" />
+    <Content Include="DataPacks\D5-Reg\velocity-1.6.arff" />
+    <Content Include="DataPacks\D5-Reg\xalan-2.7.arff" />
+    <Content Include="DataPacks\D5-Reg\xerces-1.4.arff" />
+    <Content Include="DataPacks\D5-Bin\ant-1.7.arff" />
+    <Content Include="DataPacks\D5-Bin\camel-1.6.arff" />
+    <Content Include="DataPacks\D5-Bin\ivy-2.0.arff" />
+    <Content Include="DataPacks\D5-Bin\jedit-4.3.arff" />
+    <Content Include="DataPacks\D5-Bin\log4j-1.2.arff" />
+    <Content Include="DataPacks\D5-Bin\lucene-2.4.arff" />
+    <Content Include="DataPacks\D5-Bin\poi-3.0.arff" />
+    <Content Include="DataPacks\D5-Bin\prop-6.arff" />
+    <Content Include="DataPacks\D5-Bin\synapse-1.2.arff" />
+    <Content Include="DataPacks\D5-Bin\tomcat-6.arff" />
+    <Content Include="DataPacks\D5-Bin\velocity-1.6.arff" />
+    <Content Include="DataPacks\D5-Bin\xalan-2.7.arff" />
+    <Content Include="DataPacks\D5-Bin\xerces-1.4.arff" />
+    <Content Include="init" />
+    <Content Include="migrations\alembic.ini" />
+    <Content Include="migrations\README" />
+    <Content Include="migrations\script.py.mako" />
+    <Content Include="static\bootstrap-treeview-1.2.0\.bowerrc" />
+    <Content Include="static\bootstrap-treeview-1.2.0\.gitattributes" />
+    <Content Include="static\bootstrap-treeview-1.2.0\.gitignore" />
+    <Content Include="static\bootstrap-treeview-1.2.0\.jshintrc" />
+    <Content Include="static\bootstrap-treeview-1.2.0\.travis.yml" />
+    <Content Include="static\bootstrap-treeview-1.2.0\app.js" />
+    <Content Include="static\bootstrap-treeview-1.2.0\bower.json" />
+    <Content Include="static\bootstrap-treeview-1.2.0\CHANGELOG.md" />
+    <Content Include="static\bootstrap-treeview-1.2.0\dist\bootstrap-treeview.min.css" />
+    <Content Include="static\bootstrap-treeview-1.2.0\dist\bootstrap-treeview.min.js" />
+    <Content Include="static\bootstrap-treeview-1.2.0\Gruntfile.js" />
+    <Content Include="static\bootstrap-treeview-1.2.0\LICENSE" />
+    <Content Include="static\bootstrap-treeview-1.2.0\package.json" />
+    <Content Include="static\bootstrap-treeview-1.2.0\public\css\bootstrap-treeview.css" />
+    <Content Include="static\bootstrap-treeview-1.2.0\public\example-dom.html" />
+    <Content Include="static\bootstrap-treeview-1.2.0\public\index.html" />
+    <Content Include="static\bootstrap-treeview-1.2.0\public\js\bootstrap-treeview.js" />
+    <Content Include="static\bootstrap-treeview-1.2.0\README.md" />
+    <Content Include="static\bootstrap-treeview-1.2.0\screenshot\default.PNG" />
+    <Content Include="static\bootstrap-treeview-1.2.0\src\css\bootstrap-treeview.css" />
+    <Content Include="static\bootstrap-treeview-1.2.0\src\js\bootstrap-treeview.js" />
+    <Content Include="static\bootstrap-treeview-1.2.0\tests\lib\blanket.min.js" />
+    <Content Include="static\bootstrap-treeview-1.2.0\tests\lib\bootstrap-treeview.css" />
+    <Content Include="static\bootstrap-treeview-1.2.0\tests\lib\bootstrap-treeview.js" />
+    <Content Include="static\bootstrap-treeview-1.2.0\tests\lib\jquery.js" />
+    <Content Include="static\bootstrap-treeview-1.2.0\tests\lib\qunit-1.12.0.css" />
+    <Content Include="static\bootstrap-treeview-1.2.0\tests\lib\qunit-1.12.0.js" />
+    <Content Include="static\bootstrap-treeview-1.2.0\tests\README.md" />
+    <Content Include="static\bootstrap-treeview-1.2.0\tests\tests.html" />
+    <Content Include="static\bootstrap-treeview-1.2.0\tests\tests.js" />
+    <Content Include="static\jq-ui-12.1\jquery-ui.css" />
+    <Content Include="static\own\expr-ds.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\blog\create_post.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\blog\posts.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\blog\singleComment.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\blog\viewpost.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\expr\dp\LSHExpr.html" />
+    <Content Include="templates\expr\dp\GISExpr.html" />
+    <Content Include="templates\expr\szz\clonerepo.html" />
+    <Content Include="templates\expr\szz\reposzzs.html" />
+    <Content Include="templates\expr\szz\repologs.html" />
+    <Content Include="templates\expr\szz\repoinfo.html" />
+    <Content Include="templates\expr\szz\myrepos.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="templates\users\dashboard.html" />
+    <Content Include="templates\users\signup.html" />
+    <Content Include="templates\users\login.html" />
+    <Content Include="upgrade.bat" />
+    <Content Include="init.bat">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="requirements.txt" />
+    <Content Include="static\css\bootstrap-grid.css" />
+    <Content Include="static\css\bootstrap-grid.css.map" />
+    <Content Include="static\css\bootstrap-grid.min.css" />
+    <Content Include="static\css\bootstrap-grid.min.css.map" />
+    <Content Include="static\css\bootstrap-reboot.css" />
+    <Content Include="static\css\bootstrap-reboot.css.map" />
+    <Content Include="static\css\bootstrap-reboot.min.css" />
+    <Content Include="static\css\bootstrap-reboot.min.css.map" />
+    <Content Include="static\css\bootstrap.css" />
+    <Content Include="static\css\bootstrap.css.map" />
+    <Content Include="static\css\bootstrap.min.css" />
+    <Content Include="static\css\bootstrap.min.css.map" />
+    <Content Include="static\js\bootstrap.bundle.js" />
+    <Content Include="static\js\bootstrap.bundle.js.map" />
+    <Content Include="static\js\bootstrap.bundle.min.js" />
+    <Content Include="static\js\bootstrap.bundle.min.js.map" />
+    <Content Include="static\js\bootstrap.js" />
+    <Content Include="static\js\bootstrap.js.map" />
+    <Content Include="static\js\bootstrap.min.js" />
+    <Content Include="static\js\bootstrap.min.js.map" />
+    <Content Include="templates\base.html" />
+    <Content Include="templates\index.html" />
+    <Content Include="templates\setup\index.html" />
+    <Content Include="tmp\restart.txt" />
+    <Content Include="upgrade" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CPDP\" />
+    <Folder Include="DataPacks\D5-Reg\" />
+    <Folder Include="DataPacks\D5-Bin\" />
+    <Folder Include="migrations\" />
+    <Folder Include="migrations\versions\" />
+    <Folder Include="DataPacks\" />
+    <Folder Include="DA\" />
+    <Folder Include="Blueprints\" />
+    <Folder Include="SavePath\" />
+    <Folder Include="public\" />
+    <Folder Include="static\" />
+    <Folder Include="static\bootstrap-treeview-1.2.0\" />
+    <Folder Include="static\bootstrap-treeview-1.2.0\dist\" />
+    <Folder Include="static\bootstrap-treeview-1.2.0\public\" />
+    <Folder Include="static\bootstrap-treeview-1.2.0\public\css\" />
+    <Folder Include="static\bootstrap-treeview-1.2.0\public\js\" />
+    <Folder Include="static\bootstrap-treeview-1.2.0\screenshot\" />
+    <Folder Include="static\bootstrap-treeview-1.2.0\src\" />
+    <Folder Include="static\bootstrap-treeview-1.2.0\src\css\" />
+    <Folder Include="static\bootstrap-treeview-1.2.0\src\js\" />
+    <Folder Include="static\bootstrap-treeview-1.2.0\tests\" />
+    <Folder Include="static\bootstrap-treeview-1.2.0\tests\lib\" />
+    <Folder Include="static\css\" />
+    <Folder Include="static\images\" />
+    <Folder Include="static\js\" />
+    <Folder Include="static\jq-ui-12.1\" />
+    <Folder Include="static\own\" />
+    <Folder Include="templates\" />
+    <Folder Include="templates\expr\" />
+    <Folder Include="templates\expr\dp\" />
+    <Folder Include="templates\blog\" />
+    <Folder Include="templates\expr\szz\" />
+    <Folder Include="templates\users\" />
+    <Folder Include="templates\setup\" />
+    <Folder Include="tmp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="app.py" />
+    <Compile Include="Blueprints\__init__.py" />
+    <Compile Include="Blueprints\BPBlog.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Blueprints\BPSZZ.py" />
+    <Compile Include="Blueprints\BPExperiments.py" />
+    <Compile Include="Blueprints\BPUsers.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="config.py" />
+    <Compile Include="CPDP\BCC.py" />
+    <Compile Include="CPDP\Benchmarks.py" />
+    <Compile Include="CPDP\CPDP_LSH.py" />
+    <Compile Include="CPDP\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DA\ExpDA.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DA\__init__.py" />
+    <Compile Include="google_recaptcha_file">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="mgr.py" />
+    <Compile Include="migrations\env.py" />
+    <Compile Include="migrations\versions\014faf0389b8_added_registration_field_to_user.py" />
+    <Compile Include="migrations\versions\0907edc6ba17_added_bugs_field.py" />
+    <Compile Include="migrations\versions\20053d30f7ca_added_szztype_and_szzdesc_cols_to_.py" />
+    <Compile Include="migrations\versions\3df2b373398c_modified_repo_structure_added_repo_info_.py" />
+    <Compile Include="migrations\versions\48b7c2f4beec_added_szz_log_related_tables.py" />
+    <Compile Include="migrations\versions\496ababc041b_added_graphtype_column_to_revisiondata.py" />
+    <Compile Include="migrations\versions\5a8e9ac5ac7d_added_reponame_field.py" />
+    <Compile Include="migrations\versions\88c5cb19a2d4_added_szzblame_table.py" />
+    <Compile Include="migrations\versions\9f422509e726_added_revisiondata_table.py" />
+    <Compile Include="migrations\versions\cbce88b02f0a_initial_migrate_id_fields_corrected.py" />
+    <Compile Include="models.py" />
+    <Compile Include="passenger_wsgi.py" />
+    <Compile Include="runserver.py" />
+    <Compile Include="Shared.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Web.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

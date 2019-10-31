@@ -1,0 +1,16 @@
+<div class="row replymargin">
+    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+        <div class="row commentbox" id="div-comment-{{comment.id}}">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="row">
+                    {{comment.commentText|safe}}
+                </div>
+                <div class="row">
+                    &nbsp;&nbsp; Posted By {% if comment.commentorId>0%} {{comment.commentorName}} {% else %} Anonymous {% endif %} &nbsp;&nbsp;&nbsp;&nbsp; <a onclick="return addReplyDiv({{comment.id}},{{comment.postId}});" href="#">Reply</a>
+                </div>
+
+            </div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}My Data Science Site-Repository Info{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<p><h2>Repository Info</h2>    <a href="{{url_for('BPSZZ.myrepos')}}">My Repos</a></p>
+
+<hr />
+    {% if repo  %}
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+                <h3>{{repo.repoName}}</h3>   <a href="{{url_for('BPSZZ.repologs',id = repo.id)}}">Logs</a> &nbsp;&nbsp;&nbsp;&nbsp; <a href="{{url_for('BPSZZ.reposzzs',id = repo.id)}}">SZZs</a>
+                <br />
+                <hr />
+                <h4>Repo Info Here</h4>
+                <br />
+                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+                <hr />    
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+                <h3>Operations</h3>
+                <br />
+
+                <a class="btn btn-primary m-1" href="{{url_for('BPSZZ.extlogs', id = repo.id)}}">Extract Logs</a>
+
+                <a class="btn btn-primary m-1" href="{{url_for('BPSZZ.runszz', id = repo.id)}}">Run SZZ</a>
+
+                <a class="btn btn-primary m-1" href="{{url_for('BPSZZ.genannot', id = repo.id)}}">Generate Annotation Graphs</a>
+
+                <a class="btn btn-primary m-1" href="{{url_for('BPSZZ.minifycode', id = repo.id)}}">Minify Source Code</a>
+
+                <a class="btn btn-primary m-1" href="{{url_for('BPSZZ.gendata', id = repo.id)}}">Generate Dataset(s)</a>
+
+                <a class="btn btn-primary m-1" href="{{url_for('BPSZZ.stats', id = repo.id)}}">Statistics and Info</a>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+                <hr />    
+            </div>
+        </div>
+
+        {% if message %}
+
+        <div class="row">
+            <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12">
+                <strong>Result:</strong> {{message}}
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

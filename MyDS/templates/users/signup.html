@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}My Data Science Site-Signup{% endblock %}
+{% block head %}
+{{ super() }}
+<style type="text/css">
+    .important {
+        color: #336699;
+    }
+</style>
+
+
+
+{% endblock %}
+{% block content %}
+
+<div class="row ">
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+        <form action="" method="post" data-toggle="validator" role="form">
+            <input name="_csrf_token" id="_csrf_token" type="hidden" value="{{ csrf_token() }}" />
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" required id="name" placeholder="Name" name="name" value="{{
+                  request.form.name }}">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control is-valid" id="email" required placeholder="Email" name="email" value="{{
+                  request.form.email }}" aria-describedby="emailHelp">
+                <div class="help-block with-errors text-danger"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" required name="password" placeholder="Password" value="{{
+                  request.form.password}}" />
+            </div>
+
+            <div class="form-group">
+                <label for="rep_password">Confirm Password</label>
+                <input type="password" class="form-control" id="rep_password" required name="rep_password" placeholder="Confirm Password" value="{{
+                  request.form.rep_password}}" data-match="#password" data-error="Passwords do not match!" />
+                <div class="help-block with-errors text-danger"></div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="g-recaptcha" data-sitekey="{{config.RECAPTCHA_PUBLIC_KEY}}"></div>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-primary">Signup</button>
+        </form>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12"></div>
+</div>
+
+    {% if error %}
+<div class="row">
+    <p class="error">
+        <strong>Error:</strong> {{ error }}
+    </p>
+</div>
+    {% endif %}
+
+
+    {% endblock %}
+
+{% block scripts %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+
+{% endblock %}

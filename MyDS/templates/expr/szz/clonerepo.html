@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}My Data Science Site-My Repositories{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<h2>Clone New Repository </h2>
+
+<div class="row">
+    <form action="" method="post">        
+        <input name="_csrf_token" id="_csrf_token" type="hidden" value="{{ csrf_token() }}" />
+        <div class="form-row">
+            <div class="form-group">
+                <label for="url">Repo Url</label>
+                <input type="url" class="form-control" id="url" name="url" value="{{ request.form.url}}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="repoName">Repo Name </label>
+                <input type="text" class="form-control" name="repoName" id="repoName" value="{{request.form.repoName}}">
+            </div>
+        </div>
+
+
+        <div class="form-row">
+
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="isPrivate" name="isPrivate" {% if request.form.isPrivate %} checked {% endif %}>
+                    <label class="form-check-label" for="isPrivate">
+                        Private?
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-row"> <button type="submit" class="btn btn-primary float-center text-center">Clone</button> </div>                                
+    </form>
+
+</div>
+
+{% if error %}
+<div class="row">
+    <p class="error">
+        <strong>Error:</strong> {{ error }}
+    </p>
+</div>
+        {% endif %}
+
+        {% if result %}
+<div class="row">
+    <p>
+        <strong>Notice:</strong> {{ result }}   &nbsp;&nbsp;&nbsp; <a href="{{url_for('BPSZZ.myrepos')}}"> My repositories </a>
+    </p>
+</div>
+
+        {% endif %}
+
+{% endblock %}
+

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}My Data Science Site-My Repositories{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<p>
+    <!--<a class="btn btn-primary" href="{{url_for('BPSZZ.clonerepo')}}">Clone Repo</a>-->
+</p>
+
+<p>    <h2>Repo Logs for {{repo.repoName}}</h2></p>
+
+{% if logs  and logs.count()>0  %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Log Index</th>
+            <th scope="col">Log Message</th>
+            <th scope="col">Author</th>
+            <th scope="col">Bugs?</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for log in logs %}
+        <tr>
+            <th scope="row">{{log.revIndex}}</th>
+            <td><a href="#">{{log.m}}</a></td>
+            <td>{{log.author}}</td>
+            <td>{{log.bugs}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<p>    <h6> No Logs Generated.</h6> <a class="btn btn-primary m-1" href="{{url_for('BPSZZ.extlogs', id = repo.id)}}">Extract Logs</a> </p>
+
+    {% endif %}
+
+
+<hr />
+
+{% endblock %}
