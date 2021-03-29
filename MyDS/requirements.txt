@@ -35,7 +35,7 @@ psutil==5.6.1
 Pycco==0.6.0
 pycparser==2.18
 pygit2==0.27.1
-Pygments==2.3.1
+Pygments==2.7.4
 pyparsing==2.2.0
 pystache==0.5.4
 python-dateutil==2.7.3
