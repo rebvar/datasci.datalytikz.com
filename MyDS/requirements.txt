@@ -48,7 +48,7 @@ setuptools==39.0.1
 six==1.11.0
 smartypants==2.0.1
 SQLAlchemy
-ujson==1.35
+ujson==5.4.0
 unidiff==0.5.5
 urllib3
 visitor==0.1.3
